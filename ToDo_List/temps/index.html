@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{%load static%}
+
+{% block title %}My Tasks{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{%static 'css/style.css'%}">
+{% endblock %}
+
+{% block content %}
+<div class="header">
+    <h1>✨ My Todo List</h1>
+    <p style="color: rgba(255,255,255,0.8);">Stay organized and productive</p>
+</div>
+
+<!-- Add your Django form here -->
+<form method="post" action="{%url 'Tasks:addTask'%}" class="add-task-form">
+    {% csrf_token %}
+    <div class="form-group">
+        <input type="text" name="title" class="form-input" placeholder="What needs to be done?" required>
+        <input type="text" name="description" class="form-input" placeholder="Description (optional)">
+        <button type="submit" class="btn btn-primary">Add Task</button>
+    </div>
+</form>
+
+<!-- Filter Buttons -->
+<div class="filter-buttons">
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn">Active</button>
+    <button class="filter-btn">Completed</button>
+</div>
+
+<!-- Task List -->
+<div class="task-list">
+    <!-- Example tasks - Replace with your Django template logic -->
+     {%for work in task%}
+
+    <div class="task-item">
+        <div class="task-checkbox">
+            <input type="checkbox">
+        </div>
+        <div class="task-content">
+            <div class="task-title">{{work.NewTask}}</div>
+            <div class="task-description">{{work.Description}}</div>
+        </div>
+        <div class="task-actions">
+            <button class="btn-icon">✏️</button>
+            <button class="btn-icon">🗑️</button>
+        </div>
+    </div>
+    {%endfor%}
+
+    <div class="task-item task-completed">
+        <div class="task-checkbox">
+            <input type="checkbox" checked>
+        </div>
+        <div class="task-content">
+            <div class="task-title">Learn Django basics</div>
+            <div class="task-description">Understand models, views, and templates</div>
+        </div>
+        <div class="task-actions">
+            <button class="btn-icon">✏️</button>
+            <button class="btn-icon">🗑️</button>
+        </div>
+    </div>
+
+    <!-- Empty State Example -->
+    <!-- <div class="empty-state">
+        <h3>No tasks yet</h3>
+        <p>Add your first task to get started!</p>
+    </div> -->
+</div>
+{% endblock %}
