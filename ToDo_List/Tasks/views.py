@@ -42,3 +42,13 @@ def deleteTask(req,id):
         task.delete()
         return redirect('Tasks:home')
     return render(req,'index.html',context={})
+
+
+def editTask(req,id):
+    task=models.Tasks.objects.get(pk=id)
+    if req.method=="POST":
+        task.NewTask=req.POST.get('title')
+        task.Description=req.POST.get('description')
+        task.save()
+        return redirect('Tasks:home')
+    return render(req,'edit.html',context={'uid':id,'title':task.NewTask,'description':task.Description})

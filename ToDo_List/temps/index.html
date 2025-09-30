@@ -48,7 +48,7 @@
             <div class="task-description">{{work.Description}}</div>
         </div>
         <div class="task-actions">
-            <button class="btn-icon"><a href=""><span class="material-icons">edit</span></a></button>
+            <button class="btn-icon"><a href="{%url 'Tasks:editTask' id=work.id %}"><span class="material-icons">edit</span></a></button>
             <button class="btn-icon"><a href="{%url 'Tasks:DeleteTask' id=work.id %}"><span class="material-icons">delete</span></a></button>
         </div>
     </div>
@@ -62,7 +62,7 @@
             <div class="task-description">{{work.Description}}</div>
         </div>
         <div class="task-actions">
-            <button class="btn-icon"><span class="material-icons">edit</span></button>
+            <button class="btn-icon"> <a href="{%url 'Tasks:editTask' id=work.id %}"><span class="material-icons">edit</span></a></button>
             <form action="{%url 'Tasks:DeleteTask' id=work.id %}" method="POST">
                 {%csrf_token%}
             <button class="btn-icon" type="submit"><span class="material-icons">delete</span></button>

@@ -4,7 +4,7 @@
 {% block title %}Edit Task{% endblock %}
 
 {% block style %}
-<link rel="stylesheet" href="{%url 'css/style.css'%}">
+<link rel="stylesheet" href="{%static 'css/style.css'%}">
 {% endblock %}
 {% block content %}
 <div class="header">
@@ -12,14 +12,14 @@
 </div>
 
 <div class="add-task-form">
-    <form method="post">
+    <form method="POST" action="{%url 'Tasks:editTask' uid %}">
         {% csrf_token %}
         <div style="display: flex; flex-direction: column; gap: 15px;">
-            <input type="text" name="title" class="form-input" value="Current task title" required>
-            <input type="text" name="description" class="form-input" value="Current description">
+            <input type="text" name="title" class="form-input" value="{{title}}" required>
+            <input type="text" name="description" class="form-input" value="{{description}}">
             <div style="display: flex; gap: 10px;">
                 <button type="submit" class="btn btn-primary">Update Task</button>
-                <a href="{% url 'todo_list' %}" class="btn" style="background: #6c757d; color: white; text-decoration: none;">Cancel</a>
+                <a href="{% url 'Tasks:home' %}" class="btn" style="background: #6c757d; color: white; text-decoration: none;">Cancel</a>
             </div>
         </div>
     </form>
